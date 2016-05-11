@@ -1,0 +1,35 @@
+<extend name="Base/common"/>
+<block name="content">
+<include file="./Base/model"/>
+<div class="liang_list">
+	<label class="liang_label">提醒事项</label>
+	</br>
+	<div class="liang_label" style="color:red">1.上一期的欠费的同学会添加额度</div>
+	</br>
+	<div class="liang_label" style="color:red">2.无法再次申请往期办公用品</div>
+	</br>
+		
+<form id="form" class="form-horizontal" action="__CONTROLLER__/create" autocomplete="on" method="post">
+	<label class="liang_label">办公用品申请新的一期名称</label>
+	<input class="liang_input_big" placeholder="New Period's Name" name="pname" required autofocus>
+	</br>
+	<label class="liang_label">本期可申请用品选择</label>
+
+	<!--可选用品代码区 -->
+	</br>
+	<volist name="typelist" id="votypelist">
+	<label class="checkbox-inline">
+	  <input type="checkbox" name="data[]" value="{$votypelist.cabilityid}">{$votypelist.cabilityname} ({$votypelist.brand}{$votypelist.model} && {$votypelist.price}元/{$votypelist.unit})
+	</label>
+	</br>
+	</volist>
+	
+	</br>
+	</br>
+
+	<button type="submit" class="liang_button">Create</button>
+	</form>
+</div>
+<script src="__PUBLIC__/js/liang_form.js"></script>	
+</block>
+

@@ -1,0 +1,94 @@
+<extend name="Base/common"/>
+<block name="content">
+<include file="./Base/model"/>
+<a href="#top" id="toTop"></a>
+
+<div class="liang_list">
+<label class="liang_label">设备类型</label>
+<select id="cabilityType" class="liang_label">
+<option value="all">All</option>
+	<volist name="typelist" id="votypelist">
+		<option value="{$votypelist.subtype}" <eq name="votypelist.subtype" value="$Think.get.type">selected="selected"</eq>>{$votypelist.subtype}</option>
+	</volist>
+</select>
+<button onclick="Reeditsearch(cabilityType.value)" class="liang_button">查询</button>
+
+<button style="float:right" data-toggle="modal" href="#new-device" class="liang_button">添加</button>
+
+<table class="liang_table">
+	<tr>
+		<th style="width:10%">产品序号</th>
+		<th style="width:15%">设备类型</th>
+		<th style="width:15%">编号</th>
+		<th style="width:40%">参数</th>
+
+		<th style="width:15%">操作</th>
+	</tr>
+	<volist name="borrowlist" id="voborrowlist">
+			<tr>
+			<td class="ndid">{$voborrowlist.did}</td>
+			
+			<td class="old subtype">{$voborrowlist.subtype}</td>
+			<td style="display:none" class="edit nsubtype"><input type='text' value='{$voborrowlist.subtype}' required autofocus></td>
+			
+			<td class="old id">{$voborrowlist.id}</td>
+			<td style="display:none" class="edit nid"><input type='text' value='{$voborrowlist.id}' required autofocus></td>
+			
+			<td class="old par">{$voborrowlist.parameter}</td>
+			<td style="display:none" class="edit npar"><input type='text' value='{$voborrowlist.parameter}' required autofocus></td>
+			
+			<td class="old"><button class="liangedit liang_button">编辑</button>
+			<button class="liangdamaged liang_button">损坏</button></td>
+			<td style="display:none" class="edit"><button class="liangsave liang_button">保存</button>
+			<button class="liangcancel liang_button">取消</button>
+			</td>
+		</tr>
+	</volist>
+</table>
+</div>
+	 <div class="modal fade" id="new-device">
+           <div class="modal-dialog">
+                <div class="modal-content" id="adddevices_liang">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">添加设备</h4>
+                    </div>
+                    <div class="modal-body">
+						<form id="form" class="form-horizontal" action="__CONTROLLER__/add" autocomplete="on" method="post">
+							<label class="liang_label">设备类型</label>
+							<select name="SubType" class="liang_label">
+								<volist name="typelist" id="votypelist">
+									<option value="{$votypelist.subtype}">{$votypelist.subtype}</option>
+								</volist>
+							</select>
+							<input class="" name="ID" placeholder="Device ID(设备编码)" required autofocus>
+							<input class="" name="Parameter" placeholder="Parameter(设备参数)" required autofocus>
+							<input class="" name="Type" value="Phone / Pad" style="display:none;">
+							<div id="result" class="result" name="" style="display:none;"></div>	
+							<button type="submit" class="liang_button">添加</button>
+						</form>
+					</div>
+				</div>	
+		</div>
+	</div>
+<script src="__PUBLIC__/js/jquery.scrollToTop.min.js"></script>
+<script src="__PUBLIC__/js/liang_confirmation.js"></script>
+<script src="__PUBLIC__/js/liang_cookie.js"></script>
+<script src="__PUBLIC__/js/liang_borrow.js"></script>
+<script src="__PUBLIC__/js/liang_form.js"></script>
+
+<script>
+$(function () { $('#new-device').on('hide.bs.modal', function () {
+	location.reload();
+	})
+   });
+   
+//损坏
+$('.liangdamaged').confirmation({
+singleton:true,
+});
+</script>
+
+
+</block>
+

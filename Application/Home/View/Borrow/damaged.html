@@ -1,0 +1,26 @@
+<extend name="Base/common"/>
+<block name="content">
+<include file="./Base/model"/>
+
+<div class="liang_list">
+<table class="liang_table">
+	<tr>
+		<th>序号</th>
+		<th>设备类型</th>
+		<th>编号</th>
+		<th>参数</th>	
+		<th>损坏日期</th>
+	</tr>
+	<volist name="damagedlist" id="vodamagedlist">
+			<tr>
+			<td>{$i}</td>
+			<td>{$vodamagedlist.type}</td>
+			<td>{$vodamagedlist.id}</td>
+			<td>{$vodamagedlist.parameter}</td>
+			<td>{$vodamagedlist.damageddate}</td>
+			</tr>
+	</volist>
+</table>	
+</div>
+</block>
+

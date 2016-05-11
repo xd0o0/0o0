@@ -1,0 +1,100 @@
+<extend name="Base/common"/>
+<block name="content">
+<include file="./Base/model"/>
+<div style="width:60%;margin-left:10%">
+<label class="mylabel"><h4><ul><li>我当前已借的设备, <a href="__MODULE__\Borrow\index">需要更多的设备？</a></li></ul></h4></label>
+
+<table class="liang_table" >
+	<tr>
+		<th style="width:12%">设备类型</th>
+		<th style="width:15%">编号</th>
+		<th style="width:30%">参数</th>
+							
+		<th style="width:12%">借用状态</th>
+		<th style="width:9%">借用日期</th>
+		<th style="width:9%">操作</th>
+	</tr>
+	
+	<volist name="userborrow" id="vouserborrow">
+	<tr>
+		<td>{$vouserborrow.type}</td>
+		<td>{$vouserborrow.id}</td>
+		<td>{$vouserborrow.parameter}</td>
+
+		<if condition="$vouserborrow.approved eq 2">
+			<td>使用中</td>
+			<td>{$vouserborrow.borrowdate}</td>
+			<td><button class="liang_button" onclick="ActionData('{$vouserborrow.number}','Retn')">归还</button></td>
+		<elseif condition="$vouserborrow.approved eq 1" />
+			<td>请至设备处借用</td>
+			<td>{$vouserborrow.borrowdate}</td>
+			<td><button class="liang_button" onclick="ActionData('{$vouserborrow.number}','CBrow')">取消</button></td>
+		<elseif condition="$vouserborrow.approved eq 3" />
+			<td>请至设备处归还</td>
+			<td>{$vouserborrow.borrowdate}</td>
+			<td><button class="liang_button" onclick="ActionData('{$vouserborrow.number}','CRetn')">取消</button></td>
+		</if>
+	</tr>
+	</volist>
+</table>
+<p>Total:{$userborrowlength}</p>
+
+<br />
+<br />
+<br />
+<label class="mylabel"><h4><ul><li>当前需要我审核的设备</a></li></ul></h4></label>
+<table class="liang_table" >
+	<tr>
+		<th style="width:12%">设备类型</th>
+		<th style="width:15%">编号</th>
+		<th style="width:25%">参数</th>
+							
+		<th style="width:12%">借用人</th>
+		<th style="width:9%">借用日期</th>
+		<th style="width:15%">操作</th>
+	</tr>
+	
+	<volist name="approlist" id="voapprolist">
+		<if condition="$voapprolist.approved eq 3">
+			<tr>
+		<else />
+			<tr style="background-color:#FFFFCC;">
+		</if>
+		<td>{$voapprolist.type}</td>
+		<td>{$voapprolist.id}</td>
+		<td>{$voapprolist.parameter}</td>
+
+		<if condition="$voapprolist.approved eq 1">
+			<td>{$voapprolist.cname}</td>
+			<td>{$voapprolist.borrowdate}</td>
+			<td><button class="liang_button" onclick="ActionData('{$voapprolist.number}','BrApproved')">借出</button>
+				<button class="liang_button" onclick="ActionData('{$voapprolist.number}','CBrow')">拒绝</button></td>
+		<elseif condition="$voapprolist.approved eq 3"/>
+			<td>{$voapprolist.cname}</td>
+			<td>{$voapprolist.borrowdate}</td>
+			<td><button class="liang_button" onclick="ActionData('{$voapprolist.number}','ReApproved')">归还</button>
+				<button class="liang_button" onclick="ActionData('{$voapprolist.number}','CRetn')">未还</button></td>
+		</if>
+			
+	</tr>
+	</volist>
+	
+</table>
+<p>Total:{$approlistlength}</p>
+</div>
+
+<script>
+//设备借还
+function ActionData(tempB,tempC)
+{
+$.post('__MODULE__/Borrow/action',
+{'id':tempB,'Action':tempC},
+function refresh(data){
+if(data.status){alert(data.info);}
+location.reload();
+},
+'json');
+}
+</script>
+</block>
+

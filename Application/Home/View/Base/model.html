@@ -1,0 +1,23 @@
+<table class="liang_topic" >
+		<thead>
+			<tr>
+				<th>TOPPED TOPIC</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				<h4>
+				<div class="liang_smalltitle">&nbsp;{$title}&nbsp;</div>
+				{$description}
+				<if condition="isset($othertitle)">
+					<volist name="othertitle" id="votitle">
+					<a class="liang_othertitle liang_LinkB" href="{$votitle.link}" <if condition="$i%2 eq 0"> style="background:#fff3d5" </if>>&nbsp;{$votitle.name}&nbsp;</a>
+					</volist>
+				</if>
+				</h4>
+				
+				</td>
+			</tr>
+		</tbody>
+</table>

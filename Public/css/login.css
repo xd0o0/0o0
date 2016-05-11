@@ -1,0 +1,55 @@
+
+#login_window{
+    width: 355px;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 15%;
+}
+
+#login_window h1{
+	margin: 10 auto;
+    color: #3C3C3C;
+}
+
+#account, #password, #submit, #forgetpw, #forgetemail, #submitemail {
+    height: 46px;
+    margin: 5px;
+	width: 355px;
+}
+
+#forgetemail, #submitemail {
+    margin-bottom: 25px;
+}
+
+#forpw_liang {
+    margin: 0 auto;
+    margin-top: 35%;
+	width: 400px;
+}
+
+#forpw_liang h4{
+font-weight: bolder;
+}
+
+#result, #result2 {
+font-weight: bolder;
+color: #f89406;
+}
+
+#submit {
+	background-color: #8f4b2e;
+	border-color: #8f4b2e;
+}
+
+#forgetpw {
+	background-color: #faa755;
+	border-color: #faa755;
+}
+
+form a{
+    color: #f89406;
+    text-decoration: underline;
+}
+
+
+

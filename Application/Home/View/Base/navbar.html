@@ -1,0 +1,58 @@
+ <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top" id="navbar_liang">
+      <div class="container">
+        <div class="navbar-header">
+		
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="__MODULE__">XXXXXD</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="__MODULE__">Home</a></li>
+            <li><a href="#">About</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            
+			<li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">管理<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">管理资产</a></li>
+                <li><a href="__MODULE__/Borrow/edit">管理常用设备</a></li>
+				<li><a href="__MODULE__/Mborrow/edit">管理移动设备</a></li>
+                <li><a href="#">管理IP</a></li>
+				<li><a href="__MODULE__/Need/edit">管理办公用品</a></li>
+                <li role="separator" class="divider"></li>
+
+                <li><a href='__MODULE__\Mgmt\createuser'>添加用户</a></li>
+              </ul>
+            </li>
+            
+			
+			<li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{$_SESSION['loginUserName']}<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">我的资产</a></li>
+                <li><a href="__MODULE__\Profile\myborrow">我的设备</a></li>
+				<li><a href="#">我的IP</a></li>
+				<li><a href="__MODULE__\Profile\myneed">我本月办公用品</a></li>
+                <li role="separator" class="divider"></li>
+
+                <li><a href="__MODULE__\Profile\myinfo">我的个人信息</a></li>
+				<li role="separator" class="divider"></li>
+
+                <li><a href='__MODULE__\Public\logout'>注销</a></li>
+              </ul>
+            </li>
+			
+          </ul>
+        <!--/.nav-collapse -->
+	</div>	
+ </div>
+    </nav>
+	

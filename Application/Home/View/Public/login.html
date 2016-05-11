@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+<include file="Base/head"/>
+</head>
+<body>
+
+<script language="JavaScript">
+    $(function(){
+        $('#form1').ajaxForm({
+			beforeSubmit:  process,  // pre-submit callback
+            success:       complete,  // post-submit callback
+            dataType: 'json'
+        });
+		function process(){
+				$('#result').html('正在发送中...').show();
+			}
+        function complete(data){
+                $('#result').html(data.info).show();
+        }
+    });
+	
+	
+	$(function(){
+        $('#form2').ajaxForm({
+			beforeSubmit:  process,  // pre-submit callback
+            success:       complete,  // post-submit callback
+            dataType: 'json'
+        });
+		function process(){
+				$('#result2').html('正在登录中...').show();
+			}
+        function complete(data){
+				if (data.status==1){
+                window.location.href="__CONTROLLER__";
+				}
+				else {
+				$('#result2').html(data.info).show();
+				}
+        }
+    });
+	
+</script>
+
+    <div id="login_window" class="row">
+        <h1 >Welcome to XD Team</h1>
+        <form id="form2" class="form-horizontal" action="__CONTROLLER__/checkLogin" autocomplete="on" method="post">
+                <input id="account" class="form-control col-xs-10 col-sm-6 col-md-9" name="account" type="text" placeholder="user name" required autofocus>
+				<input id="password" class="form-control col-xs-8 col-sm-5 col-md-7" name="password" type="password" placeholder="password" required>
+                
+				<div id="result2" class="result2" style="display:none;"></div>
+				
+				<div class="form-group"> <div class="col-sm-10"><div class="checkbox"><label>
+				<input name="remember" type="checkbox" value="1"> Remember me</label>
+				</div></div></div>
+				
+				<button id="submit" type="submit" class="form-control btn btn-primary btn-lg">Sign In</button>
+		</form>
+				<button id="forgetpw" type="button" class="form-control btn btn-info" data-toggle="modal" href='#modal-id'>Forget Password</button>
+   </div>
+	
+		
+	 <div class="modal fade" id="modal-id">
+           <div class="modal-dialog">
+                <div class="modal-content" id="forpw_liang">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">找回密码</h4>
+                    </div>
+                    <div class="modal-body">
+						<form id="form1" class="form-horizontal" action="__CONTROLLER__/ForgetPassword" autocomplete="on" method="post">
+							<input id="forgetemail" class="form-control col-xs-10 col-sm-6 col-md-9" name="forgetemail" type="email" placeholder="Your Email Address" required autofocus>
+							<div id="result" class="result" style="display:none;"></div>	
+							<button id="submitemail" type="submit" class="form-control btn btn-primary btn-lg">Reset Password</button>
+						</form>
+					</div>
+				</div>	
+		</div>
+	</div>
+</body>
+	
+</html>

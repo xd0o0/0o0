@@ -1,0 +1,55 @@
+<table>
+	<tr>
+		<th>No.</th>
+		<th>品名</th>
+		<th>品牌</th>
+		<th>型号</th>
+							
+
+		<th>单位</th>
+		<th>申请数量</th>
+		<th>领用人</th>
+		<th>总价</th>
+	</tr>
+	
+	<volist name="needlist" id="voneedlist">
+		<tr>
+			<td>{$i}</td>
+			<td>{$voneedlist.cabilityname}</td>
+			<td>{$voneedlist.brand}</td>
+			<td>{$voneedlist.model}</td>
+
+			<td>{$voneedlist.unit}</td>
+			<td>{$voneedlist.count}</td>
+			<td>{$voneedlist.cname}</td>
+			<td>{$voneedlist['price']*$voneedlist['count']}</td>
+		</tr>
+	</volist>
+	
+	<tr></tr><tr></tr>
+	
+	<tr>
+		<th>No.</th>
+		<th>品名</th>
+		<th>品牌</th>
+		<th>型号</th>
+		<th>单位</th>
+		<th>申请数量</th>
+		<th>总价格</th>
+	</tr>
+	
+	<volist name="typelist" id="votypelist">
+		<tr>
+			<td>{$i}</td>
+			<td>{$votypelist.cabilityname}</td>
+			<td>{$votypelist.brand}</td>
+			<td>{$votypelist.model}</td>
+
+			<td>{$votypelist.unit}</td>
+			<td>{$votypelist.allcount}</td>
+			<td>{$votypelist['price']*$votypelist['allcount']}</td>
+		
+		</tr>
+	</volist>
+	
+</table>

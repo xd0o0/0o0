@@ -1,0 +1,76 @@
+<extend name="Base/common"/>
+<block name="content">
+<include file="./Base/model"/>
+<a href="#top" id="toTop"></a>
+<div class="liang_list">
+<h3>{$periodname}</h3>
+
+<form id="form" class="form-horizontal" style="width:80%;float:left" action="__CONTROLLER__/apply" autocomplete="on" method="post">
+<label class="liang_label">办公用品名称</label>
+<select name="PID" class="liang_label liang_input">
+	<volist name="typelist" id="votypelist">
+		<option value="{$votypelist.pid}" title="{$votypelist.brand}{$votypelist.model} && {$votypelist.price}元/{$votypelist.unit}">{$votypelist.cabilityname}</option>
+	</volist>
+</select>
+<input class="liang_label liang_input" name="Count" placeholder="申请数量" required autofocus>
+<button type="submit" class="liang_button">提交</button>
+</form>
+<button style="float:right" class="liang_button" onclick="location='__CONTROLLER__/excel/tempdate/{$periodid}';">导出Excel</button>
+
+<table class="liang_table">
+	<tr>
+		<th style="width:5%">序号</th>
+		<th style="width:12%">品名</th>
+		<th style="width:12%">品牌</th>
+		<th style="width:15%">型号</th>
+							
+		<th style="width:12%">价格</th>
+		<th style="width:12%">单位</th>
+		<th style="width:10%">申请数量</th>
+		<th style="width:12%">领用人</th>
+		<th style="width:10%">操作</th>
+	</tr>
+	
+	<volist name="needlist" id="voneedlist">
+		<if condition="$voneedlist.userid eq $_SESSION[C('USER_AUTH_KEY')]">
+			<tr style="background-color:#FFEFD5;">
+		<else />
+			<tr>
+		</if>
+		
+			<td>{$i}</td>
+			<td>{$voneedlist.cabilityname}</td>
+			<td>{$voneedlist.brand}</td>
+			<td>{$voneedlist.model}</td>
+			<td>{$voneedlist.price}</td>
+			<td>{$voneedlist.unit}</td>
+			<td>{$voneedlist.count}</td>
+			<td>{$voneedlist.cname}</td>
+		<if condition="$voneedlist.userid eq $_SESSION[C('USER_AUTH_KEY')]">
+			<td><button class="liang_button" onclick="ActionData('{$voneedlist.number}')">取消</button></td>
+		<else />
+			<td></td>
+		</if>
+			
+		</tr>
+	</volist>
+</table>	
+
+</div>
+<script src="__PUBLIC__/js/jquery.scrollToTop.min.js"></script>
+<script src="__PUBLIC__/js/liang_cookie.js"></script>
+<script src="__PUBLIC__/js/liang_form.js"></script>
+<script>
+function ActionData(tempA)
+{
+$.post('cancel',
+{'number':tempA},
+function refresh(data){
+if(data.status){alert(data.info);}
+location.reload();
+},
+'json');
+}
+</script>
+</block>
+

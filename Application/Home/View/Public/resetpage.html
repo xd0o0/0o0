@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+<include file="Base/head"/>
+</head>
+<body>
+
+<script language="JavaScript">
+    $(function(){
+        $('#form1').ajaxForm({
+			beforeSubmit:  process,  // pre-submit callback
+            success:       complete,  // post-submit callback
+            dataType: 'json'
+        });
+		function process(){
+				if( $.trim($('#password2').val()) != $.trim($('#password1').val()))
+				{
+				$('#result').html('两次密码输入不一致').show();
+				return false;
+				}
+			}
+			
+        function complete(data){
+				alert(data.info);
+				window.location.href="/PHP/Home/Public/login";
+				// $('#result').html(data.info).show();
+        }
+    });
+    </script>
+
+    <div id="resetpage_window" class="row">
+        <h1 >请设置密码</h1>
+        <form id="form1" class="form-horizontal" action="__SELF__" autocomplete="on" method="post">
+                <input id="password1" class="form-control col-xs-10 col-sm-6 col-md-9" name="password1" type="password" placeholder="new password" required autofocus>
+				<input id="password2" class="form-control col-xs-8 col-sm-5 col-md-7" name="password2" type="password" placeholder="new password again" required>
+                <div id="result" class="result" style="display:none;"></div>
+				<button id="submit" type="submit" class="form-control btn btn-primary btn-lg">Submit</button>
+		</form>
+   </div>
+
+</body>
+	
+</html>

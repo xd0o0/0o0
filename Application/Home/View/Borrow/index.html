@@ -1,0 +1,69 @@
+<extend name="Base/common"/>
+<block name="content">
+<include file="./Base/model"/>
+<a href="#top" id="toTop"></a>
+
+<div class="liang_list">
+<label class="liang_label">设备类型</label>
+<select id="cabilityType" class="liang_label">
+<option value="all">All</option>
+	<volist name="typelist" id="votypelist">
+		<option value="{$votypelist.type}" <eq name="votypelist.type" value="$Think.get.type">selected="selected"</eq>>{$votypelist.type}</option>
+	</volist>
+</select>
+<button onclick="Research(cabilityType.value)" class="liang_button">查询</button>
+
+<table class="liang_table">
+	<tr>
+		<th style="width:5%">序号</th>
+		<th style="width:12%">设备类型</th>
+		<th style="width:15%">编号</th>
+		<th style="width:38%">参数</th>
+							
+		<th style="width:12%">借用人</th>
+		<th style="width:9%">借用日期</th>
+		<th style="width:9%">操作</th>
+	</tr>
+	<volist name="borrowlist" id="voborrowlist">
+		<if condition="$voborrowlist.approved eq 0">
+			<tr>
+		<else />
+			<tr style="background-color:#FFFFCC;">
+		</if>
+		
+			<td>{$i}</td>
+			<td>{$voborrowlist.type}</td>
+			<td>{$voborrowlist.id}</td>
+			<td>{$voborrowlist.parameter}</td>
+
+			<if condition="$voborrowlist.approved eq 0">
+				<td></td>
+				<td></td>
+				<td><button class="liang_button" onclick="ActionData('{$voborrowlist.number}','Brow')">借用</button></td>
+			<elseif condition="$voborrowlist.approved eq 2 AND $voborrowlist.userid eq $_SESSION[C('USER_AUTH_KEY')]"/>
+				<td>{$voborrowlist.cname}</td>
+				<td>{$voborrowlist.borrowdate}</td>
+				<td><button class="liang_button" onclick="ActionData('{$voborrowlist.number}','Retn')">归还</button></td>
+			<elseif condition="$voborrowlist.approved eq 1 AND $voborrowlist.userid eq $_SESSION[C('USER_AUTH_KEY')]"/>
+				<td>请至设备处借用</td>
+				<td>{$voborrowlist.borrowdate}</td>
+				<td><button class="liang_button" onclick="ActionData('{$voborrowlist.number}','CBrow')">取消</button></td>
+			<elseif condition="$voborrowlist.approved eq 3 AND $voborrowlist.userid eq $_SESSION[C('USER_AUTH_KEY')]"/>
+				<td>请至设备处归还</td>
+				<td>{$voborrowlist.borrowdate}</td>
+				<td><button class="liang_button" onclick="ActionData('{$voborrowlist.number}','CRetn')">取消</button></td>
+			<else/>
+				<td>{$voborrowlist.cname}</td>
+				<td>{$voborrowlist.borrowdate}</td>
+				<td></td>
+			</if>
+			
+		</tr>
+	</volist>
+</table>	
+</div>
+<script src="__PUBLIC__/js/jquery.scrollToTop.min.js"></script>
+<script src="__PUBLIC__/js/liang_cookie.js"></script>
+<script src="__PUBLIC__/js/liang_borrow.js"></script>
+</block>
+

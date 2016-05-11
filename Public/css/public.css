@@ -1,0 +1,107 @@
+
+#login_window{
+    width: 355px;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 15%;
+}
+
+#login_window h1{
+	margin: 10 auto;
+    color: #3C3C3C;
+}
+
+#account, #password, #submit, #forgetpw, #forgetemail, #submitemail,#password1,#password2 {
+    height: 46px;
+    margin: 5px;
+	width: 355px;
+}
+
+#forgetemail, #submitemail {
+    margin-bottom: 25px;
+}
+
+#forpw_liang {
+    margin: 0 auto;
+    margin-top: 35%;
+	width: 400px;
+}
+
+#forpw_liang h4{
+font-weight: bolder;
+}
+
+#result, #result2 {
+font-weight: bolder;
+color: #f89406;
+}
+
+#submit {
+	background-color: #8f4b2e;
+	border-color: #8f4b2e;
+}
+
+#forgetpw {
+	background-color: #faa755;
+	border-color: #faa755;
+}
+
+form a{
+    color: #f89406;
+    text-decoration: underline;
+}
+
+#resetpage_window{
+    width: 355px;
+    height: 300px;
+    margin-left: 15%;
+}
+
+#ftupw1,#ftupw2,#ftuun,#ftusb,#ftuemail,#ftuaccount,#ftuundate {
+    height: 40px;
+    margin: 3px;
+	width: 355px;
+	padding-left: 12px;
+	padding-right: 12px;
+}
+
+#ftulabel {
+	margin: 0px;
+	float: none;
+}
+
+#ftulabel h4{
+	margin-bottom: 0px;
+}
+
+#fturs {
+	padding-top: 12px;
+	font-weight: bolder;
+	color: #f89406;
+}
+
+#ftu_window{
+    margin-left: 15%;
+}
+
+#ftu_windowA{
+    width: 355px;
+    height: 300px;
+	margin-left: 5%;
+	float:left;
+}
+
+#ftu_windowC{
+    width: 500px;
+    height: 300px;
+	margin-left: 10%;
+	float:left;
+}
+
+#ftusb {
+    height: 40px;
+	margin-top: 5%;
+	margin-left: 5%;
+	width: 355px;
+	padding: 0%;
+}

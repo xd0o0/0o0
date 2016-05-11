@@ -1,0 +1,56 @@
+<extend name="Base/common"/>
+<block name="content">
+<include file="./Base/model"/>
+<a href="#top" id="toTop"></a>
+<div class="liang_list">
+
+<div class="liang_list">
+<label class="liang_label">往期申请名称</label>
+<select id="period" class="liang_label">
+	<volist name="periodlist" id="voperiodlist">
+		<option value="{$voperiodlist.periodid}" <eq name="voperiodlist.periodid" value="$Think.get.periodid">selected="selected"</eq>>{$voperiodlist.pname}</option>
+	</volist>
+</select>
+<button onclick="Research(period.value)" class="liang_button">查询</button>
+<button style="float:right" class="liang_button" onclick="location='__CONTROLLER__/excel/tempdate/{$periodid}';">导出Excel</button>
+<h3>{$periodname}</h3>
+<table class="liang_table">
+	<tr>
+		<th style="width:5%">序号</th>
+		<th style="width:12%">品名</th>
+		<th style="width:12%">品牌</th>
+		<th style="width:15%">型号</th>
+							
+		<th style="width:12%">价格</th>
+		<th style="width:12%">单位</th>
+		<th style="width:10%">申请数量</th>
+		<th style="width:12%">领用人</th>
+	</tr>
+	
+	<volist name="needlist" id="voneedlist">
+
+			<tr>
+			<td>{$i}</td>
+			<td>{$voneedlist.cabilityname}</td>
+			<td>{$voneedlist.brand}</td>
+			<td>{$voneedlist.model}</td>
+			<td>{$voneedlist.price}</td>
+			<td>{$voneedlist.unit}</td>
+			<td>{$voneedlist.count}</td>
+			<td>{$voneedlist.cname}</td>
+			
+		</tr>
+	</volist>
+</table>	
+
+</div>
+<script src="__PUBLIC__/js/jquery.scrollToTop.min.js"></script>
+<script src="__PUBLIC__/js/liang_cookie.js"></script>
+<script>
+function Research(tempA)
+{
+this.location = 'history?periodid='+tempA;
+}
+</script>
+</block>
+

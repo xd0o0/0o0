@@ -1,0 +1,142 @@
+<extend name="Base/common"/>
+<block name="content">
+<include file="./Base/model"/>
+		<form id="form" action="__CONTROLLER__/editpassword" method="post">
+			<div id="ftu_windowB" class="row">
+				<div id="ftu_windowA" class="row">
+				<label id="ftulabel1" class="mylabel"><h4>您的邮箱</h4></label>
+                <input class="myinput" name="myemail" value="{$user.email}" readonly>
+				</br>
+				<label id="ftulabel2" class="mylabel"><h4>您的登录信息</h4></label>
+                <input class="myinput" placeholder="登录名" value="{$user.account}" readonly>
+				</div>
+				
+				<div id="ftu_windowC" class="row">
+				<label id="ftulabel3" class="mylabel"><h4>您的个人信息</h4></label>
+					<div class="row">
+					<input class="myinput" placeholder="姓名" value="{$user.nickname}" readonly>
+					</div>
+					<div class="row">
+					<input class="myinput" placeholder="员工号" value="{$user.employeeid}" readonly>
+					</div>
+					<div class="row">
+					<input class="myinput" placeholder="Skype" value="{$user.skype}" readonly>
+					</div>
+					<div class="row">
+					<input class="myinput" placeholder="手机号" value="{$user.phone}" readonly>
+					</div>
+					<div class="row">
+					<input class="myinput" placeholder="家乡" value="{$user.hometown}" readonly>
+					</div>
+					<div class="row">
+					<input class="myinput" placeholder="出生年月" value="{$user.birthday}" readonly>
+					</div>
+				</div>
+			</div>
+			<div id="ftu_windowD" class="row">
+				<button id="myinfoEdit" type="button" class="form-control btn btn-primary btn-lg" data-toggle="modal" href='#modal-id'>Edit</button>
+				<button id="myinforEditPassword" type="submit" class="form-control btn btn-primary btn-lg">Change Password</button>
+			</div>	
+			
+		</form>	
+
+								
+	 <div class="modal fade" id="modal-id">
+           <div class="modal-dialog">
+                <div class="modal-content" id="myinfo_update">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">修改您的个人信息</h4>
+                    </div>
+                    <div class="modal-body" id="myinfo_update_body">
+						<form id="myinfoform" class="form-horizontal" action="__CONTROLLER__/myinfo" autocomplete="on" method="post">
+									<div class="row">
+									<input id="mynickname" class="myinput" name="nickname" placeholder="姓名" value="{$old.nickname}" required autofocus>
+									<if condition="isset($errors['nickname'])">
+									<div id="fturs">{$errors.nickname}</div>
+									</if>
+									</div>
+									
+									<div class="row">
+									<input id="myemployeeid" class="myinput" name="employeeid" placeholder="员工号" value="{$old.employeeid}" required autofocus>
+									<if condition="isset($errors['employeeid'])">
+									<div id="fturs">{$errors.employeeid}</div>
+									</if>
+									</div>
+									
+									<div class="row">
+									<input id="myskype" class="myinput" name="skype" placeholder="Skype" value="{$old.skype}" required autofocus>
+									<if condition="isset($errors['skype'])">
+									<div id="fturs">{$errors.skype}</div>
+									</if>
+									</div>
+									
+									<div class="row">
+									<input id="myhone" class="myinput" name="phone" placeholder="手机号" value="{$old.phone}" required autofocus> 
+									<if condition="isset($errors['phone'])">
+									<div id="fturs">{$errors.phone}</div>
+									</if>
+									</div>
+									
+									<div class="row">
+									<input id="myhometown" class="myinput" name="hometown" placeholder="家乡" value="{$old.hometown}" required autofocus>
+									<if condition="isset($errors['hometown'])">
+									<div id="fturs">{$errors.hometown}</div>
+									</if>
+									</div>
+									
+									<div class="row">
+									<input id="mybirthday" class="myinput" name="birthday" placeholder="出生年月" value="{$old.birthday}" required autofocus>
+									<if condition="isset($errors['birthday'])">
+									<div id="fturs">{$errors.birthday}</div>
+									</if>
+									</div>
+									
+								<input type="hidden" name="id" value="{$user.id}">
+								<button id="myinfoSb" type="submit" class="form-control btn btn-primary btn-lg">Save</button>
+								<button id="myinfoCancel" type="button" class="form-control btn btn-primary btn-lg" data-dismiss="modal">Cancel</button>
+						</form>
+					</div>
+				</div>	
+		</div>
+	</div>
+
+<script>
+$(function() { 
+	if({$edit}){
+	$('#modal-id').modal('show')
+	}
+	else {
+	$('#modal-id').modal('hide')
+	}
+});
+
+
+$(function () { $('#modal-id').on('hide.bs.modal', function () {
+  if(window.confirm('你确定要取消保存吗？')){
+                 //alert("确定");
+				 window.location.href="__CONTROLLER__/myinfo";
+                 return true;
+              }else{
+                 //alert("取消");
+                 return false;
+             }
+	})
+   });
+
+$('#mybirthday').datetimepicker(
+{ 
+	format: 'yyyy-mm-dd',
+	minView: 2,
+	autoclose: true
+});
+
+$('#mybirthday').datetimepicker().on('changeDate', function(ev) {}).on('hide', function(event) {
+event.preventDefault();
+event.stopPropagation();
+});
+</script>
+
+<script src="__PUBLIC__/js/liang_form.js"></script>
+</block>
+

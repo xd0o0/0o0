@@ -1,0 +1,12 @@
+<extend name="Base/common"/>
+<block name="content">
+<include file="./Base/model"/>
+
+<form id="form" class="form-horizontal" action="__CONTROLLER__/createuser" autocomplete="on" method="post">
+	<input id="newuseremail" class="form-control col-xs-10 col-sm-6 col-md-9" name="email" type="email" placeholder="New User's Email Address" required autofocus>
+	<button id="newemail" type="submit" class="form-control btn btn-primary btn-lg">Send Email to New User</button>
+	<div id="result" class="result" style="display:none;"></div>
+</form>	
+<script src="__PUBLIC__/js/liang_form.js"></script>
+</block>
+

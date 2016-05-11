@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+<include file="Base/head"/>
+</head>
+<body>
+
+    <div id="ftu_window" class="row">
+        <h1>请注册相关信息</h1>
+        <form id="ftuform" class="form-horizontal" action="__CONTROLLER__/FTU" autocomplete="on" method="post">
+			<div id="ftu_windowB" class="row">
+				<div id="ftu_windowA" class="row">
+				<label id="ftulabel"><h4>请确认您的邮箱</h4></label>
+				
+                <input id="ftuemail" class="form-control col-xs-10 col-sm-6 col-md-9" name="email" value="{$_SESSION['ftuemail']}" required autofocus readonly>
+				<if condition="isset($errors['email'])">
+                <div id="fturs">{$errors.email}</div>
+                </if>
+				</br>
+				<label id="ftulabel"><h4>请输入您的登录信息</h4></label>
+                <input id="ftuaccount" class="form-control col-xs-10 col-sm-6 col-md-9" name="account" placeholder="登录名" value="{$old.account}" required autofocus>
+			
+				<input id="ftupw1" class="form-control col-xs-10 col-sm-6 col-md-9" name="password" type="password" placeholder="new password" required autofocus>
+				<input id="ftupw2" class="form-control col-xs-8 col-sm-5 col-md-7" name="confirm_password" type="password" placeholder="new password again" required> 
+				<if condition="isset($errors['account'])">
+                <div id="fturs">{$errors.account}</div>
+                </if>
+				<if condition="isset($errors['password'])">
+                <div id="fturs">{$errors.password}</div>
+                </if>
+				
+				</div>
+				
+				<div id="ftu_windowC" class="row">
+				<label id="ftulabel"><h4> 请输入您的个人信息</h4></label>
+				
+					<div class="row">
+					<input id="ftuun" class="form-control col-xs-10 col-sm-6 col-md-9" name="nickname" placeholder="姓名" value="{$old.nickname}" required autofocus>
+					<if condition="isset($errors['nickname'])">
+					<div id="fturs">{$errors.nickname}</div>
+					</if>
+					</div>
+					
+					<div class="row">
+					<input id="ftuun" class="form-control col-xs-10 col-sm-6 col-md-9" name="employeeid" placeholder="员工号" value="{$old.employeeid}" required autofocus>
+					<if condition="isset($errors['employeeid'])">
+					<div id="fturs">{$errors.employeeid}</div>
+					</if>
+					</div>
+					
+					<div class="row">
+					<input id="ftuun" class="form-control col-xs-10 col-sm-6 col-md-9" name="skype" placeholder="Skype" value="{$old.skype}" required autofocus>
+					<if condition="isset($errors['skype'])">
+					<div id="fturs">{$errors.skype}</div>
+					</if>
+					</div>
+					
+					<div class="row">
+					<input id="ftuun" class="form-control col-xs-10 col-sm-6 col-md-9" name="phone" placeholder="手机号" value="{$old.phone}" required autofocus>
+					<if condition="isset($errors['phone'])">
+					<div id="fturs">{$errors.phone}</div>
+					</if>
+					</div>
+					
+					<div class="row">
+					<input id="ftuun" class="form-control col-xs-10 col-sm-6 col-md-9" name="hometown" placeholder="家乡" value="{$old.hometown}" required autofocus>
+					<if condition="isset($errors['hometown'])">
+					<div id="fturs">{$errors.hometown}</div>
+					</if>
+					</div>
+					
+					<div class="row">
+					<input id="ftuundate" class="form-control col-xs-10 col-sm-6 col-md-9" name="birthday" placeholder="出生年月" value="{$old.birthday}" required autofocus>
+					<if condition="isset($errors['birthday'])">
+					<div id="fturs">{$errors.birthday}</div>
+					</if>
+					</div>
+					
+				</div>
+			</div>
+			<div id="ftu_windowD" class="row">
+				<button id="ftusb" type="submit" class="form-control btn btn-primary btn-lg">Submit</button>
+			</div>	
+		</form>
+   </div>
+
+<script language="JavaScript">
+$('#ftuundate').datetimepicker(
+{
+	format: 'yyyy-mm-dd',
+	autoclose: true,
+	minView: 2
+});
+</script>
+   
+</body>
+	
+</html>

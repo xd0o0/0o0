@@ -1,0 +1,80 @@
+<extend name="Base/common"/>
+<block name="content">
+<include file="./Base/model"/>
+<a href="#top" id="toTop"></a>
+<div class="liang_list">
+
+
+<table class="liang_table">
+	<tr>
+		<th style="width:10%">产品序号</th>
+		
+		<th style="width:15%">品名</th>
+		<th style="width:15%">品牌</th>
+		<th style="width:15%">型号</th>					
+		<th style="width:15%">价格</th>
+		<th style="width:15%">单位</th>
+
+		<th style="width:15%">操作</th>
+	</tr>
+	<volist name="needlist" id="voneedlist">
+			<tr>
+			<td class="id">{$voneedlist.cabilityid}</td>
+			
+			<td class="old name">{$voneedlist.cabilityname}</td>
+			<td style="display:none" class="edit nname"><input type='text' value='{$voneedlist.cabilityname}' required autofocus></td>
+			
+			<td class="old brand">{$voneedlist.brand}</td>
+			<td style="display:none" class="edit nbrand"><input type='text' value='{$voneedlist.brand}' required autofocus></td>
+			
+			<td class="old model">{$voneedlist.model}</td>
+			<td style="display:none" class="edit nmodel"><input type='text' value='{$voneedlist.model}' required autofocus></td>
+			
+			<td class="old price">{$voneedlist.price}</td>
+			<td style="display:none" class="edit nprice"><input type='text' value='{$voneedlist.price}' required autofocus></td>
+			
+			<td class="old unit">{$voneedlist.unit}</td>
+			<td style="display:none" class="edit nunit"><input type='text' value='{$voneedlist.unit}' required autofocus></td>
+			
+			<td class="old"><button class="liangedit liang_button">Edit</button>
+			<td style="display:none" class="edit"><button class="liangsave liang_button">Save</button>
+			<button class="liangcancel liang_button">Cancel</button>
+			</td>
+		</tr>
+	</volist>
+</table>
+</br>
+<button style="float:right" data-toggle="modal" href="#new-device" class="liang_button">Add</button>
+</div>
+	 <div class="modal fade" id="new-device">
+           <div class="modal-dialog">
+                <div class="modal-content" id="addneed_liang">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">添加办公用品</h4>
+                    </div>
+                    <div class="modal-body">
+						<form id="form" class="form-horizontal" action="__CONTROLLER__/edit" autocomplete="on" method="post">
+							<input class="" name="CabilityName" placeholder="品名" required autofocus>
+							</br>
+							<input class="" name="Brand" placeholder="品牌" required autofocus>
+							</br>
+							<input class="" name="Model" placeholder="型号" required autofocus>
+							</br>
+							<input class="" name="Price" placeholder="价格" required autofocus>
+							</br>
+							<input class="" name="Unit" placeholder="单位" required autofocus>
+							</br>
+							<div id="result" class="result" name="" style="display:none;"></div>	
+							<button type="submit" style="float:right" class="liang_button">添加</button>
+						</form>
+					</div>
+				</div>	
+		</div>
+	</div>
+<script src="__PUBLIC__/js/jquery.scrollToTop.min.js"></script>
+<script src="__PUBLIC__/js/liang_cookie.js"></script>
+<script src="__PUBLIC__/js/liang_need.js"></script>
+<script src="__PUBLIC__/js/liang_form.js"></script>
+</block>
+
