@@ -18,18 +18,22 @@
 				$('#result').html('两次密码输入不一致').show();
 				return false;
 				}
+				else {
+					$('#result').html('小二正在处理中....').show();
+					}
 			}
 			
         function complete(data){
 				alert(data.info);
-				window.location.href="/PHP/Home/Public/login";
+				window.location.href="__CONTROLLER__";
 				// $('#result').html(data.info).show();
         }
     });
     </script>
 
     <div id="resetpage_window" class="row">
-        <h1 >请设置密码</h1>
+        <h1>请设置密码</h1>
+		<h3>注意：过于简单，曾经用过的密码都会被服务器拒绝</h3>
         <form id="form1" class="form-horizontal" action="__SELF__" autocomplete="on" method="post">
                 <input id="password1" class="form-control col-xs-10 col-sm-6 col-md-9" name="password1" type="password" placeholder="new password" required autofocus>
 				<input id="password2" class="form-control col-xs-8 col-sm-5 col-md-7" name="password2" type="password" placeholder="new password again" required>

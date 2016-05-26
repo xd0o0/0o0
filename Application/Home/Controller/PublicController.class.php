@@ -81,13 +81,20 @@ class PublicController extends Controller {
 		
         //使用用户名、密码和状态 的方式进行认证
         if(false == $authInfo) {
-            $this->error('帐号不存在或已禁用！');
+            $this->error('帐号未激活或已禁用！');
         }
 		else {
-            if($authInfo['password'] != $_POST['password']) {
-                $this->error('密码错误！');
-        }
+			
+            // if($authInfo['password'] != $_POST['password']) {
+                // $this->error('密码错误！');
+        // }
 		
+			if(!($this->checkldap($_POST['account'],$_POST['password'])))
+			{
+				$this->error('密码错误！');
+			}
+			
+
 			
             $_SESSION[C('USER_AUTH_KEY')]	=	$authInfo['id'];
             $_SESSION['email']				=	$authInfo['email'];
@@ -116,6 +123,12 @@ class PublicController extends Controller {
             $userdata['last_login_time']	=	$time;
             $userdata['login_count']	=	array('exp','login_count+1');
             $userdata['last_login_ip']	=	$ip;
+			
+			//更新密码信息
+			if($authInfo['password'] != $_POST['password']) {
+				$userdata['password']	=  $_POST['password'];
+			}
+			
             $User->save($userdata);
 		
 		
@@ -184,9 +197,14 @@ class PublicController extends Controller {
 	public function ResetPage() {
 		$userModel = D('User');
 		if (IS_POST && $_SESSION['repwuserid']) {
-				if ($userModel-> getUserId($_SESSION['repwuserid'])) {
 				
+				$userCP = $userModel-> getUserId($_SESSION['repwuserid']);
+				if ($userCP) {
+				
+				//更改密码
 				$userModel-> updatePW($_SESSION['repwuserid'],$_POST['password1']);
+				// $this->success("powershell -file D:\workspaces\PHP\Action\ad.ps1 1 ".$userCP['account']." '".$_POST['password1']."'");
+				system("powershell -file D:\workspaces\PHP\Action\ad.ps1 1 ".$userCP['account']." ".$_POST['password1']);
 				
 				//删除时间码
 				$userModel-> deleteUserKey($_SESSION['repwuserid']);
@@ -244,7 +262,7 @@ class PublicController extends Controller {
 				session_destroy();
 			//	dump($ftuModel->getLastSql());
 			
-				$this->success('注册成功','/PHP/Home/Public/login',3);
+				$this->success('注册成功',PHP_FILE.C('USER_AUTH_GATEWAY'),3);
             } 
             else {
                 $this->assign('errors', $userModel->getError());
@@ -257,17 +275,20 @@ class PublicController extends Controller {
 		else
 		{
 			//判断页面是否有效
-			if ($ftuModel->getftuKey($_GET['email'],$_GET['key'])) {
-				$_SESSION['ftuemail'] = $_GET['email'];
-				$this->assign('ftuemail',$_SESSION['ftuemail']);
-			//	dump($_SESSION['ftuid']);
-				$this -> display();
+			if (!($ftuModel->getftuKey($_GET['email'],$_GET['key']))) {
 			//	dump('页面有效');
+			//	$this -> display();
+			//  dump('页面无效');
+				$this->error('邀请链接无效！',PHP_FILE.C('USER_AUTH_GATEWAY'),2);
 			}
 			else {
-			//	$this -> display();
-			//	dump('页面无效');
-				$this->error('邀请链接无效！','/PHP/Home/Public/login',2);
+				$_SESSION['ftuemail'] = $_GET['email'];
+				$_SESSION['ftuusername'] = $ftuModel->getftuUser($_GET['key']);
+				// dump('11111');
+				// dump($ftuModel->getlastsql());
+				// dump($_SESSION['ftuemail']);
+
+				$this -> display();
 			}
 		}
 	}
@@ -290,6 +311,33 @@ class PublicController extends Controller {
         }
     }
 
+	
+	public function checkldap($username,$password) {
+		$ds=ldap_connect("172.16.80.248","389");  // must be a valid LDAP server!
+		
+		if ($ds) 
+		{
+			if (ldap_bind($ds, $username , $password))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+			
+			// ldap_close($ds);
+		}
+		else
+		{
+			$this->error('无法连接域控');
+		}
+	}
+	
+	public function accesserror() {
+		$this -> display();
+	}
+	
 }
 
 	

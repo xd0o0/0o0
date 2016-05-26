@@ -1,18 +1,18 @@
 <extend name="Base/common"/>
 <block name="content">
 <include file="./Base/model"/>
-<div style="width:60%;margin-left:10%">
-<label class="mylabel"><h4><ul><li>我当前已借的设备, <a href="__MODULE__\Borrow\index">需要更多的设备？</a></li></ul></h4></label>
+<div style="width:85%;margin-left:5%">
+<label class="mylabel"><h4><ul><li>我当前已借的设备, <a href="__MODULE__/Borrow/index">需要更多的设备？</a></li></ul></h4></label>
 
 <table class="liang_table" >
 	<tr>
-		<th style="width:12%">设备类型</th>
-		<th style="width:15%">编号</th>
+		<th style="width:15%">设备类型</th>
+		<th style="width:12%">编号</th>
 		<th style="width:30%">参数</th>
 							
 		<th style="width:12%">借用状态</th>
-		<th style="width:9%">借用日期</th>
-		<th style="width:9%">操作</th>
+		<th style="width:12%">借用日期</th>
+		<th style="width:20%">操作</th>
 	</tr>
 	
 	<volist name="userborrow" id="vouserborrow">
@@ -42,16 +42,19 @@
 <br />
 <br />
 <br />
+<notempty name="approlistlength">
 <label class="mylabel"><h4><ul><li>当前需要我审核的设备</a></li></ul></h4></label>
 <table class="liang_table" >
 	<tr>
-		<th style="width:12%">设备类型</th>
-		<th style="width:15%">编号</th>
-		<th style="width:25%">参数</th>
+		<th style="width:15%">设备类型</th>
+		<th style="width:12%">编号</th>
+		<th style="width:30%">参数</th>
 							
-		<th style="width:12%">借用人</th>
-		<th style="width:9%">借用日期</th>
-		<th style="width:15%">操作</th>
+		<th style="width:12%">借用状态</th>
+		<th style="width:12%">借用日期</th>
+		<th style="width:20%">操作</th>
+		
+
 	</tr>
 	
 	<volist name="approlist" id="voapprolist">
@@ -82,7 +85,7 @@
 </table>
 <p>Total:{$approlistlength}</p>
 </div>
-
+</notempty>
 <script>
 //设备借还
 function ActionData(tempB,tempC)

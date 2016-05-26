@@ -23,6 +23,11 @@ class UserModel extends Model
 			self::MODEL_BOTH
         ) ,
 		array(
+            'nickname',
+            '/^[\x{4e00}-\x{9fa5}]+$/u',
+            '用户名只能由中文字符组成'
+        ) ,
+		array(
             'account',
             '',
             '登录名被别人占用了',
@@ -33,21 +38,21 @@ class UserModel extends Model
 		array(
             'account',
             '/^[A-Za-z0-9\\-]+$/',
-            '登录名必须由英文字符和数字组成'
+            '登录名只能由英文字符和数字组成'
         ) ,
         array(
             'password',
             'require',
             '密码必须填写'
         ) ,
-        array(
-			'password',
-            'confirm_password',
-            '确认密码不一致',
-            self::MUST_VALIDATE,
-            'confirm',
-            self::MODEL_INSERT
-        ) ,
+        // array(
+			// 'password',
+            // 'confirm_password',
+            // '确认密码不一致',
+            // self::MUST_VALIDATE,
+            // 'confirm',
+            // self::MODEL_INSERT
+        // ) ,
         array(
             'email',
             'require',
@@ -91,8 +96,8 @@ class UserModel extends Model
         ) ,
 		array(
             'skype',
-            '/^live:[a-zA-Z0-9_]+$/',
-            'skype帐号是以live:开头'
+            'require',
+            'Skype必须填写'
         ) ,
 		array(
             'employeeid',

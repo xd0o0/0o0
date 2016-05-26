@@ -48,7 +48,7 @@ class ProfileController extends CommonController {
 		$this -> display();
 	}
 	
-	public function EditPassword() {
+	public function editPassword() {
 		$userModel = D('User');
 		// dump($userModel->getEmailAddress($_POST['forgetemail']));
 		if ($userModel-> getUserId($_SESSION[C('USER_AUTH_KEY')]))
@@ -89,10 +89,11 @@ class ProfileController extends CommonController {
 		
 		$this->assign('userborrow',$userborrow);
 		$this->assign('userborrowlength', count($userborrow));
-
+		
+		if($this -> checkAccess() == 2) {
 		$this->assign('approlist',$approlist);
 		$this->assign('approlistlength', count($approlist));
-		
+		}
 		
 		$this -> display();
 		
@@ -104,6 +105,15 @@ class ProfileController extends CommonController {
 		$this -> assign(title,"我的办公用品");
 		$this -> assign(description,"查看、申请本月个人办公用品");
 		
+		
+		$OfficePeriodModel = D('OfficePeriod');
+		$OfficeListModel = D('OfficeList');
+
+		$periodid = $OfficePeriodModel->getLatestPeriod();
+
+		$this -> assign(typelist,$OfficePeriodModel->getOfficeByPeriodid($periodid));
+
+		$this -> assign(needlist,$OfficeListModel->getNeedbyPeriodIDandUser($_SESSION[C('USER_AUTH_KEY')],$periodid));
 
 
 		$this -> display();

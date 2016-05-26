@@ -6,7 +6,7 @@ use Think\Model;
 class OfficeListModel extends Model
 {
 				
-	//根据Userid和PID获取本月的已申请办公用品
+	//根据Userid和PID获取本月的已申请办公用品的总价
 	public function getNeedbyUserID($userid,$lastperiodid) {
 		
 		$result=0;
@@ -30,4 +30,13 @@ class OfficeListModel extends Model
 		return $result;
 		
 	}
+	
+	//根据Userid和PID获取本月的已申请办公用品
+	public function getNeedbyPeriodIDandUser($userid,$lastperiodid) {
+		
+		$result=$this->where('UserID ="'.$userid.'" and PeriodID ="'.$lastperiodid.'"')->select();
+		
+		return $result;
+	}
+		
 }

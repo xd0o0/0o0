@@ -16,8 +16,8 @@ class AutoController extends CommonController {
 		$this -> assign(othertitle,$data);
 		
 		// $cmd = 'C:/1.bat';
-		system("C:\\1.bat",$out);
-		dump($out);
+		// system("C:\\1.bat",$out);
+		// dump($out);
 		$this -> display();
 
     }

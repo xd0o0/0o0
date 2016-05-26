@@ -35,5 +35,14 @@ class FtuModel extends Model
 			);
     	$this-> where($condition) ->delete();
     }
+	
+	  public function getftuUser($key) {
+		$condition=array(
+				'ftukey'=> $key
+			);
+		$result=$this->where($condition)->getField('username');
+		
+		return $result;
+	  }
 
 }

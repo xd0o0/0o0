@@ -2,11 +2,37 @@
 <block name="content">
 <include file="./Base/model"/>
 
-<form id="form" class="form-horizontal" action="__CONTROLLER__/createuser" autocomplete="on" method="post">
+<form id="form" class="form-horizontal" action="__CONTROLLER__/createuser" autocomplete="on" method="post" style="margin-left:2%">
+	<input id="newusername" class="form-control col-xs-10 col-sm-6 col-md-9" name="username" placeholder="New User's Name" required autofocus>
 	<input id="newuseremail" class="form-control col-xs-10 col-sm-6 col-md-9" name="email" type="email" placeholder="New User's Email Address" required autofocus>
+
 	<button id="newemail" type="submit" class="form-control btn btn-primary btn-lg">Send Email to New User</button>
-	<div id="result" class="result" style="display:none;"></div>
+	<div id="result" class="result" style="display:none"></div>
 </form>	
-<script src="__PUBLIC__/js/liang_form.js"></script>
+<script>
+$(function(){
+		$('#form').ajaxForm({
+			beforeSubmit:  process,  // pre-submit callback
+			success:       complete,  // post-submit callback
+			dataType: 'json'
+		});
+		
+	function process(){
+		var username = document.getElementById('newusername').value;
+		var regx=/^[A-Za-z0-9\\-]+$/;
+		
+		if(!regx.test(username)) {
+			$('#result').html('登录名只能由英文字符和数字组成').show();
+			return false;
+		}
+		else {
+		$('#result').html('小二正在处理中....').show();
+		}
+	}
+	function complete(data){
+		$('#result').html(data.info).show();
+	}
+});
+</script>
 </block>
 

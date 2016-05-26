@@ -2,11 +2,13 @@
 <block name="content">
 <include file="./Base/model"/>
 <div class="liang_list">
-	<label class="liang_label">提醒事项</label>
+	<label class="liang_label">提醒事项：当你创建后</label>
 	</br>
-	<div class="liang_label" style="color:red">1.上一期的欠费的同学会添加额度</div>
+	<div class="liang_label" style="color:red">1.大家会被添加额度</div>
 	</br>
-	<div class="liang_label" style="color:red">2.无法再次申请往期办公用品</div>
+	<div class="liang_label" style="color:red">2.无法再次申请上一期办公用品</div>
+	</br>
+	<div class="liang_label" style="color:red">3.无法删除这一期的申请</div>
 	</br>
 		
 <form id="form" class="form-horizontal" action="__CONTROLLER__/create" autocomplete="on" method="post">
@@ -27,7 +29,7 @@
 	</br>
 	</br>
 
-	<button type="submit" class="liang_button">Create</button>
+	<button type="submit" class="liang_button">创建</button>
 	</form>
 </div>
 <script src="__PUBLIC__/js/liang_form.js"></script>	
